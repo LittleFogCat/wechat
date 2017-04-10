@@ -1,0 +1,36 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="custom_style_main" parent="AppTheme">
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="actionOverflowMenuStyle">@style/OverFlowStyle</item>
+        <item name="android:itemTextAppearance">@style/TextAppearance</item>
+        <item name="actionOverflowButtonStyle">@style/MyOverflowButtonStyle</item>
+    </style>
+
+    <style name="OverFlowStyle" parent="@android:style/Widget.Material.PopupMenu.Overflow">
+        <item name="android:overlapAnchor">false</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:popupBackground">@color/colorPrimaryDark</item>
+        <item name="android:popupTheme">@style/PopupStyle</item>
+    </style>
+
+    <style name="PopupStyle">
+        <item name="android:textColor">#eeeeee</item>
+    </style>
+
+    <style name="TextAppearance" parent="TextAppearance.AppCompat.Widget.PopupMenu.Large">
+        <item name="android:textColor">#fff</item>
+    </style>
+    <style name="MyOverflowButtonStyle" parent="@android:style/Widget.ActionButton.Overflow">
+        <item name="android:src">@drawable/add_light_center_inside_thin</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+</resources>
