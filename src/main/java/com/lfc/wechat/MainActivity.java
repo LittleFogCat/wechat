@@ -1,33 +1,32 @@
 package com.lfc.wechat;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v4.view.PagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jauker.widget.BadgeView;
+import com.lfc.wechat.pages.chatlist.FragmentChat;
+import com.lfc.wechat.pages.chatlist.MyPagerAdapter;
+import com.lfc.wechat.pages.contact.ContactFragment;
+import com.lfc.wechat.pages.discover.DiscoverFragment;
+import com.lfc.wechat.pages.me.MeFragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
@@ -37,9 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     List<RelativeLayout> footItems;
     LinearLayout footerLayout;
 
-    View page1, page2, page3, page4;
-    RecyclerView recyclerViewMsg;
     ViewPager viewPager;
+    Fragment mChatListFragment, mContactFragment, mDiscoverFragment, mMeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,56 +68,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //初始化中部
     void initBody() {
         viewPager = (ViewPager) findViewById(R.id.view_pager);
-        LayoutInflater inflater = getLayoutInflater();
-        page1 = inflater.inflate(R.layout.page1, null);
-        page2 = inflater.inflate(R.layout.page2, null);
-        page3 = inflater.inflate(R.layout.page3, null);
-        page4 = inflater.inflate(R.layout.page4, null);
-        final List<View> pages = new ArrayList<>();
-        pages.add(page1);
-        pages.add(page2);
-        pages.add(page3);
-        pages.add(page4);
+//        LayoutInflater inflater = getLayoutInflater();
+//        pageChat = inflater.inflate(R.layout.chat_fragment, viewPager, false);
+//        contact_fragment = inflater.inflate(R.layout.contact_fragment, viewPager, false);
+//        discover_fragment = inflater.inflate(R.layout.discover_fragment, viewPager, false);
+//        me_fragment = inflater.inflate(R.layout.me_fragment, viewPager, false);
+//        final List<View> pages = new ArrayList<>();
+//        pages.add(pageChat);
+//        pages.add(contact_fragment);
+//        pages.add(discover_fragment);
+//        pages.add(me_fragment);
 
-//        listView = (ListView) page1.findViewById(R.id.list_view_message);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-//        adapter.addAll(msgs);
-//        listView.setAdapter(adapter);
+        mChatListFragment = FragmentChat.newInstance();
+        mContactFragment = ContactFragment.newInstance();
+        mDiscoverFragment = DiscoverFragment.newInstance();
+        mMeFragment = MeFragment.newInstance();
+        List<Fragment> fragments = new ArrayList<>(Arrays.asList(mChatListFragment, mContactFragment, mDiscoverFragment, mMeFragment));
 
-        recyclerViewMsg = (RecyclerView) page1.findViewById(R.id.recycler_view_message);
-        List<MessageItem> messageItems = new ArrayList<>();
-        for (int i = 0; i < 15; i++) {
-            messageItems.add(new MessageItem(R.drawable.avatar_sample0, "第" + i + "条", new Random().nextInt(24) + ":" + new Random().nextInt(59)));
-        }
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-        recyclerViewMsg.setLayoutManager(mLayoutManager);
-        MyAdapter myAdapter = new MyAdapter(messageItems);
-        recyclerViewMsg.setAdapter(myAdapter);
+        FragmentPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), fragments);
 
-
-
-        PagerAdapter pagerAdapter = new PagerAdapter() {
-            @Override
-            public int getCount() {
-                return pages.size();
-            }
-
-            @Override
-            public boolean isViewFromObject(View view, Object object) {
-                return view == object;
-            }
-
-            @Override
-            public Object instantiateItem(ViewGroup container, int position) {
-                container.addView(pages.get(position));
-                return pages.get(position);
-            }
-
-            @Override
-            public void destroyItem(ViewGroup container, int position, Object object) {
-                container.removeView(pages.get(position));
-            }
-        };
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -259,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onPrepareOptionsMenu(Menu menu) {
 //            if (menu.getClass().getSimpleName().equals("MenuBuilder")){
 //                try {
-        if (menu != null) {
+        if (menu != null && menu instanceof MenuBuilder) {
             ((MenuBuilder) menu).setOptionalIconsVisible(true);
         }
 //                    Method m=menu.getClass().getDeclaredMethod("setOptionalIconsVisible",Boolean.TYPE);

@@ -2,12 +2,14 @@ package com.lfc.wechat;
 
 import android.view.View;
 
+import java.util.Comparator;
+
 /**
  * Created by jjy on 2017/4/2.
  */
 
-public class MessageItem {
-    public MessageItem(int mAvatarId, String mTitle, String mLatestMsg, String mTime, int mVisibility) {
+public class MessageItem  {
+    public MessageItem(int mAvatarId, String mTitle, String mLatestMsg, long mTime, int mVisibility) {
         this.mAvatarId = mAvatarId;
         this.mTitle = mTitle;
         this.mLatestMsg = mLatestMsg;
@@ -15,7 +17,7 @@ public class MessageItem {
         this.mVisibility = mVisibility;
     }
 
-    public MessageItem(int mAvatarId, String mTitle, String mTime) {
+    public MessageItem(int mAvatarId, String mTitle, long mTime) {
         this.mAvatarId = mAvatarId;
         this.mTitle = mTitle;
         this.mTime = mTime;
@@ -23,9 +25,10 @@ public class MessageItem {
         this.mVisibility = View.INVISIBLE;
     }
 
-    int mAvatarId;
-    String mTitle;
-    String mLatestMsg;
-    String mTime;
-    int mVisibility;
+    public int mAvatarId;
+    public String mTitle;
+    public String mLatestMsg;
+    public long mTime;
+    public int mVisibility;
+
 }
