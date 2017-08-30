@@ -6,17 +6,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/listPreferredItemHeight"
+        android:layout_height="134px"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingBottom="8dp"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="8dp">
+        android:paddingRight="16dp">
 
         <ImageView
             android:id="@+id/img_msg_avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="96px"
+            android:layout_height="96px"
             android:adjustViewBounds="true"
             android:scaleType="centerInside"
             android:src="@drawable/avatar_sample0" />
@@ -24,7 +23,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="10dp">
+            android:padding="24px">
 
             <View
                 android:id="@+id/divider_title_latest"
@@ -70,9 +69,9 @@
         </RelativeLayout>
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/lightGray"
-        />
+        android:background="@color/lightGray" />
 </LinearLayout>

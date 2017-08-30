@@ -10,10 +10,26 @@ import java.util.List;
 public class Chat {
     private User fromUser;
     private List<Message> messageList;
+    public int mVisibility;
 
     public Chat(User fromUser, List<Message> messageList) {
         this.fromUser = fromUser;
         this.messageList = messageList;
+    }
+
+    public Chat visibility(int visibility) {
+        mVisibility = visibility;
+        return this;
+    }
+
+    public Chat fromUser(User fromUser) {
+        this.fromUser = fromUser;
+        return this;
+    }
+
+    public Chat messageList(List<Message> messageList) {
+        this.messageList = messageList;
+        return this;
     }
 
     public User getFromUser() {

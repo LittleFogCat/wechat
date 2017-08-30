@@ -17,37 +17,48 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jauker.widget.BadgeView;
-import com.lfc.wechat.pages.chatlist.FragmentChat;
-import com.lfc.wechat.pages.chatlist.MyPagerAdapter;
-import com.lfc.wechat.pages.contact.ContactFragment;
-import com.lfc.wechat.pages.discover.DiscoverFragment;
-import com.lfc.wechat.pages.me.MeFragment;
+import com.lfc.wechat.base.BaseActivity;
+import com.lfc.wechat.main.chatlist.ChatListFragment;
+import com.lfc.wechat.main.chatlist.MyPagerAdapter;
+import com.lfc.wechat.main.contacts.ContactFragment;
+import com.lfc.wechat.main.discover.DiscoverFragment;
+import com.lfc.wechat.main.me.MeFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import butterknife.BindView;
+
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
-    Toolbar toolbar;
 
-    RelativeLayout footerChats, footerContacts, footerDiscover, footerMe;
-    List<RelativeLayout> footItems;
+    @BindView(R.id.header)
+    Toolbar toolbar;
+    @BindView(R.id.footer_chats)
+    RelativeLayout footerChats;
+    @BindView(R.id.footer_contacts)
+    RelativeLayout footerContacts;
+    @BindView(R.id.footer_discover)
+    RelativeLayout footerDiscover;
+    @BindView(R.id.footer_me)
+    RelativeLayout footerMe;
+    @BindView(R.id.footer)
     LinearLayout footerLayout;
+
+    List<RelativeLayout> footItems;
 
     ViewPager viewPager;
     Fragment mChatListFragment, mContactFragment, mDiscoverFragment, mMeFragment;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int getContentView() {
+        return R.layout.activity_main;
+    }
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
-
+    @Override
+    protected void initView() {
         initWidgets();
         initBody();
         initFooter();
@@ -79,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        pages.add(discover_fragment);
 //        pages.add(me_fragment);
 
-        mChatListFragment = FragmentChat.newInstance();
+        mChatListFragment = ChatListFragment.newInstance();
         mContactFragment = ContactFragment.newInstance();
         mDiscoverFragment = DiscoverFragment.newInstance();
         mMeFragment = MeFragment.newInstance();
@@ -118,16 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //初始化底部
     void initFooter() {
-        footerLayout = (LinearLayout) findViewById(R.id.footer);
-        footerChats = (RelativeLayout) findViewById(R.id.footer_chats);
-        footerContacts = (RelativeLayout) findViewById(R.id.footer_contacts);
-        footerDiscover = (RelativeLayout) findViewById(R.id.footer_discover);
-        footerMe = (RelativeLayout) findViewById(R.id.footer_me);
-        footItems = new ArrayList<>();
-        footItems.add(footerChats);
-        footItems.add(footerContacts);
-        footItems.add(footerDiscover);
-        footItems.add(footerMe);
+        footItems = new ArrayList<>(Arrays.asList(footerChats, footerContacts, footerDiscover, footerMe));
 
         footerChats.setOnClickListener(this);
         footerContacts.setOnClickListener(this);
@@ -138,27 +140,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ((ImageView) footerChats.findViewById(R.id.img_footer_fill)).setImageResource(R.drawable.bottom_chat_fill);
         ((TextView) footerChats.findViewById(R.id.txt_footer)).setText("Chats");
         ((TextView) footerChats.findViewById(R.id.txt_footer_fill)).setText("Chats");
-//        ((TextView) footerChatsFill.findViewById(R.id.txt_footer)).setText("Chats");
         ((ImageView) footerContacts.findViewById(R.id.img_footer)).setImageResource(R.drawable.bottom_contacts);
         ((ImageView) footerContacts.findViewById(R.id.img_footer_fill)).setImageResource(R.drawable.bottom_contacts_fill);
         ((TextView) footerContacts.findViewById(R.id.txt_footer)).setText("Contacts");
         ((TextView) footerContacts.findViewById(R.id.txt_footer_fill)).setText("Contacts");
-//        ((TextView) footerContactsFill.findViewById(R.id.txt_footer)).setText("Contacts");
         ((ImageView) footerDiscover.findViewById(R.id.img_footer)).setImageResource(R.drawable.bottom_discover);
         ((ImageView) footerDiscover.findViewById(R.id.img_footer_fill)).setImageResource(R.drawable.bottom_discover_fill);
         ((TextView) footerDiscover.findViewById(R.id.txt_footer)).setText("Discover");
         ((TextView) footerDiscover.findViewById(R.id.txt_footer_fill)).setText("Discover");
-//        ((TextView) footerDiscoverFill.findViewById(R.id.txt_footer)).setText("Discover");
         ((ImageView) footerMe.findViewById(R.id.img_footer)).setImageResource(R.drawable.bottom_me);
         ((ImageView) footerMe.findViewById(R.id.img_footer_fill)).setImageResource(R.drawable.bottom_me_fill);
         ((TextView) footerMe.findViewById(R.id.txt_footer)).setText("Me");
         ((TextView) footerMe.findViewById(R.id.txt_footer_fill)).setText("Me");
-//        ((TextView) footerMeFill.findViewById(R.id.txt_footer)).setText("Me");
-
-        footerChats.setOnClickListener(this);
-        footerContacts.setOnClickListener(this);
-        footerDiscover.setOnClickListener(this);
-        footerMe.setOnClickListener(this);
     }
 
     @Override

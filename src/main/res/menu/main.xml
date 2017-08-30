@@ -9,15 +9,15 @@
 
     <item
         android:id="@+id/menu_new_chat"
-        android:icon="@drawable/chat_center_thin"
+        android:icon="@mipmap/create_group"
         android:title="New Chat" />
     <item
         android:id="@+id/menu_add_contacts"
-        android:icon="@drawable/add_contact_center_thin"
+        android:icon="@mipmap/add_friend"
         android:title="Add Contacts" />
     <item
         android:id="@+id/menu_scan_qr_code"
-        android:icon="@drawable/scan_qr_code_thin"
+        android:icon="@mipmap/scan"
         android:title="Scan QR Code" />
     <item
         android:id="@+id/Money"
@@ -25,6 +25,6 @@
         android:title="Money" />
     <item
         android:id="@+id/menu_help_and_feedback"
-        android:icon="@drawable/help_and_feedback_thin"
+        android:icon="@mipmap/help"
         android:title="Help &amp; Feedback" />
 </menu>

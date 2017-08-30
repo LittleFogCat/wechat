@@ -10,11 +10,34 @@ public class User {
     private String avatarUrl;
     private String area;
 
+    public User() {
+    }
+
     public User(String username, String nickname, String avatarUrl, String area) {
         this.username = username;
         this.nickname = nickname;
         this.avatarUrl = avatarUrl;
         this.area = area;
+    }
+
+    public User username(String username) {
+        this.username = username;
+        return this;
+    }
+
+    public User nickname(String nickname) {
+        this.nickname = nickname;
+        return this;
+    }
+
+    public User avatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+        return this;
+    }
+
+    public User area(String area) {
+        this.area = area;
+        return this;
     }
 
     public String getUsername() {

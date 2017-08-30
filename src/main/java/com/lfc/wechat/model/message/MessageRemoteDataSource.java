@@ -11,6 +11,6 @@ import java.util.List;
 public class MessageRemoteDataSource implements MessageDataSource {
     @Override
     public List<Chat> getChatList() {
-        return null;
+        return new FakeMessageDataSource().getChatList();
     }
 }
