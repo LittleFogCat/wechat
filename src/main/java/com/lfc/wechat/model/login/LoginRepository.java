@@ -2,6 +2,7 @@ package com.lfc.wechat.model.login;
 
 import com.lfc.wechat.global.Constant;
 import com.lfc.wechat.login.LoginListener;
+import com.lfc.wechat.login.RegisterListener;
 import com.lfc.wechat.model.BaseRepository;
 
 /**
@@ -26,7 +27,7 @@ public class LoginRepository extends BaseRepository
     }
 
     @Override
-    public void register(String username, String password) {
-
+    public void register(String username, String password, RegisterListener registerListener) {
+        mDataSource.register(username, password, registerListener);
     }
 }

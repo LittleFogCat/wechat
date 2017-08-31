@@ -2,6 +2,7 @@ package com.lfc.wechat.login;
 
 import com.lfc.wechat.base.IBasePresenter;
 import com.lfc.wechat.base.IBaseView;
+import com.lfc.wechat.entity.Account;
 
 /**
  * Created by LittleFogCat on 2017/8/30.
@@ -12,6 +13,10 @@ public interface LoginContract {
         void onLoginSuccess();
 
         void onLoginFailed();
+
+        void onRegisterSuccess(Account account);
+
+        void onRegisterFailure(Throwable e);
     }
 
     interface Presenter extends IBasePresenter {

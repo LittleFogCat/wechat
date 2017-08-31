@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.lfc.wechat.entity.Account;
 import com.lfc.wechat.login.LoginListener;
+import com.lfc.wechat.login.RegisterListener;
+import com.lfc.wechat.throwable.WrongUsernameOrPasswordException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by LittleFogCat on 2017/8/30.
@@ -32,9 +35,9 @@ public class LoginRemoteDataSource implements LoginDataSource {
             @Override
             public void done(List<Account> list, BmobException e) {
                 if (e != null) {
-                    loginListener.onLoginFailed(e.getMessage());
+                    loginListener.onLoginFailed(e);
                 } else if (list == null || list.isEmpty()) {
-                    loginListener.onLoginFailed("没有查询到");
+                    loginListener.onLoginFailed(new WrongUsernameOrPasswordException());
                 } else {
                     Log.d(TAG, "done: " + list);
                     loginListener.onLoginSuccess();
@@ -44,7 +47,35 @@ public class LoginRemoteDataSource implements LoginDataSource {
     }
 
     @Override
-    public void register(String username, String password) {
-
+    public void register(final String username, final String password, final RegisterListener registerListener) {
+        BmobQuery<Account> query = new BmobQuery<>();
+        query.addWhereEqualTo("username", username);
+        query.findObjects(new FindListener<Account>() {
+            @Override
+            public void done(List<Account> list, BmobException e) {
+                if (e != null) {
+                    registerListener.onRegisterFailure(e);
+                } else if (list != null && !list.isEmpty()) {
+                    registerListener.onRegisterFailure(new WrongUsernameOrPasswordException("用户已存在"));
+                } else {
+                    final Account account = new Account();
+                    account.setUsername(username);
+                    account.setPassword(password);
+                    account.save(new SaveListener<String>() {
+                        @Override
+                        public void done(String objectId, BmobException e) {
+                            if (e != null) {
+                                registerListener.onRegisterFailure(e);
+                            } else if (objectId == null || objectId.equals("")) {
+                                registerListener.onRegisterFailure(new Throwable("未知错误"));
+                            } else {
+                                account.setObjectId(objectId);
+                                registerListener.onRegisterSuccess(account);
+                            }
+                        }
+                    });
+                }
+            }
+        });
     }
 }

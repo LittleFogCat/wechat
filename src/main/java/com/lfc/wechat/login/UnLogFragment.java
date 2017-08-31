@@ -16,7 +16,7 @@ import butterknife.BindView;
  * Created by LittleFogCat on 2017/8/30.
  */
 
-public class UnlogFragment extends BaseFragment {
+public class UnLogFragment extends BaseFragment {
     @BindView(R.id.btnLogin)
     TextView mBtnLogin;
     @BindView(R.id.btnReg)
@@ -24,11 +24,11 @@ public class UnlogFragment extends BaseFragment {
     @BindView(R.id.btnLanguage)
     TextView mLanguage;
 
-    public static UnlogFragment newInstance() {
+    public static UnLogFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        UnlogFragment fragment = new UnlogFragment();
+        UnLogFragment fragment = new UnLogFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -48,13 +48,24 @@ public class UnlogFragment extends BaseFragment {
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UnlogFragment.this.startLoginFragment();
+                UnLogFragment.this.startLoginFragment();
+            }
+        });
+        mBtnReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startRegisterFragment();
             }
         });
     }
 
     private void startLoginFragment() {
         LoginFragment loginFragment = LoginFragment.newInstance();
-        CommonUtils.addFragment(((AppCompatActivity) getActivity()), loginFragment, R.id.frame_content);
+        CommonUtils.addFragment(getFragmentManager(), loginFragment, R.id.frame_content);
+    }
+
+    private void startRegisterFragment() {
+        RegisterFragment registerFragment = RegisterFragment.newInstance();
+        CommonUtils.addFragment(getFragmentManager(), registerFragment, R.id.frame_content);
     }
 }

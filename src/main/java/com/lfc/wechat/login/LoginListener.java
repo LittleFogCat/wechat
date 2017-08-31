@@ -1,5 +1,7 @@
 package com.lfc.wechat.login;
 
+import javax.security.auth.login.LoginException;
+
 /**
  * Created by LittleFogCat on 2017/8/30.
  */
@@ -7,5 +9,5 @@ package com.lfc.wechat.login;
 public interface LoginListener {
     void onLoginSuccess();
 
-    void onLoginFailed(String message);
+    void onLoginFailed(Throwable e);
 }

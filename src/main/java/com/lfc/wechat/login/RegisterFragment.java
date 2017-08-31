@@ -2,8 +2,8 @@ package com.lfc.wechat.login;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,23 +15,23 @@ import com.lfc.wechat.base.IBasePresenter;
 import butterknife.BindView;
 
 /**
- * Created by LittleFogCat on 2017/8/30.
+ * Created by LittleFogCat on 2017/8/31.
  */
 
-public class LoginFragment extends BaseFragment {
-
+public class RegisterFragment extends BaseFragment {
+    private static final String TAG = "RegisterFragment";
     @BindView(R.id.et_username)
-    EditText mEtUsername;
+    TextView mUsername;
     @BindView(R.id.et_password)
-    EditText mEtPassword;
-    @BindView(R.id.btn_login)
-    TextView mLogin;
+    TextView mPassword;
+    @BindView(R.id.btn_register)
+    TextView mRegister;
     @BindView(R.id.back)
     ImageView mBack;
 
-    public static LoginFragment newInstance() {
+    public static RegisterFragment newInstance() {
         Bundle args = new Bundle();
-        LoginFragment fragment = new LoginFragment();
+        RegisterFragment fragment = new RegisterFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -43,7 +43,7 @@ public class LoginFragment extends BaseFragment {
 
     @Override
     public int getContentView() {
-        return R.layout.login_fragment;
+        return R.layout.register_fragment;
     }
 
     @Override
@@ -54,20 +54,20 @@ public class LoginFragment extends BaseFragment {
                 getFragmentManager().popBackStack();
             }
         });
-        mLogin.setOnClickListener(new View.OnClickListener() {
+        mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = mEtUsername.getText().toString();
-                String password = mEtPassword.getText().toString();
+                Log.d(TAG, "onClick: register");
+                String username = mUsername.getText().toString();
+                String password = mPassword.getText().toString();
                 if (TextUtils.isEmpty(username)) {
                     Toast.makeText(getContext(), "用户名不能为空", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(password)) {
                     Toast.makeText(getContext(), "密码不能为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    ((LoginActivity) getActivity()).onLoginClicked(username, password);
+                    ((LoginActivity) getActivity()).onRegisterClicked(username, password);
                 }
             }
         });
     }
-
 }
