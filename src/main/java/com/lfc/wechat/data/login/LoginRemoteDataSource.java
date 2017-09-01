@@ -1,4 +1,4 @@
-package com.lfc.wechat.model.login;
+package com.lfc.wechat.data.login;
 
 import android.util.Log;
 
@@ -64,6 +64,7 @@ public class LoginRemoteDataSource implements LoginDataSource {
                     account.save(new SaveListener<String>() {
                         @Override
                         public void done(String objectId, BmobException e) {
+                            Log.i(TAG, "done: " + objectId + ", " + e);
                             if (e != null) {
                                 registerListener.onRegisterFailure(e);
                             } else if (objectId == null || objectId.equals("")) {

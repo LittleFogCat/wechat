@@ -29,8 +29,17 @@
     <style name="TextAppearance" parent="TextAppearance.AppCompat.Widget.PopupMenu.Large">
         <item name="android:textColor">#fff</item>
     </style>
+
     <style name="MyOverflowButtonStyle" parent="@android:style/Widget.ActionButton.Overflow">
         <item name="android:src">@drawable/add_light_center_inside_thin</item>
         <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="MeFragmentItem">
+        <item name="android:background">@drawable/me_fragment_item_bg</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_height">98px</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingLeft">24px</item>
     </style>
 </resources>

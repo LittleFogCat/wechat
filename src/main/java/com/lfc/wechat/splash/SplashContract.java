@@ -17,6 +17,6 @@ public interface SplashContract {
     interface Presenter extends IBasePresenter {
         void readLoginInfo();
 
-        void autoLogin();
+        void autoLogin(String username, String password);
     }
 }

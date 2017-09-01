@@ -6,11 +6,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lfc.wechat.R;
 import com.lfc.wechat.base.BaseFragment;
 import com.lfc.wechat.base.IBasePresenter;
+import com.lfc.wechat.utils.CommonUtils;
 
 import butterknife.BindView;
 
@@ -61,9 +61,9 @@ public class RegisterFragment extends BaseFragment {
                 String username = mUsername.getText().toString();
                 String password = mPassword.getText().toString();
                 if (TextUtils.isEmpty(username)) {
-                    Toast.makeText(getContext(), "用户名不能为空", Toast.LENGTH_SHORT).show();
+                    CommonUtils.showToast(getContext(), "用户名不能为空");
                 } else if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getContext(), "密码不能为空", Toast.LENGTH_SHORT).show();
+                    CommonUtils.showToast(getContext(), "密码不能为空");
                 } else {
                     ((LoginActivity) getActivity()).onRegisterClicked(username, password);
                 }

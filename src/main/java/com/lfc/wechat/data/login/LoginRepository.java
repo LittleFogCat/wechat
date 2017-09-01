@@ -1,9 +1,9 @@
-package com.lfc.wechat.model.login;
+package com.lfc.wechat.data.login;
 
-import com.lfc.wechat.global.Constant;
+import com.lfc.wechat.global.GlobalConstant;
 import com.lfc.wechat.login.LoginListener;
 import com.lfc.wechat.login.RegisterListener;
-import com.lfc.wechat.model.BaseRepository;
+import com.lfc.wechat.data.BaseRepository;
 
 /**
  * Created by LittleFogCat on 2017/8/30.
@@ -14,7 +14,7 @@ public class LoginRepository extends BaseRepository
     private LoginDataSource mDataSource;
 
     public LoginRepository() {
-        if (Constant.USE_REMOTE_REPOSITORY) {
+        if (GlobalConstant.USE_REMOTE_REPOSITORY) {
             mDataSource = new LoginRemoteDataSource();
         } else {
             mDataSource = new FakeLoginDataSource();

@@ -9,22 +9,22 @@
 
     <item
         android:id="@+id/menu_new_chat"
-        android:icon="@mipmap/create_group"
+        android:icon="@mipmap/create_group_thin"
         android:title="New Chat" />
     <item
         android:id="@+id/menu_add_contacts"
-        android:icon="@mipmap/add_friend"
+        android:icon="@mipmap/add_friend_thin"
         android:title="Add Contacts" />
     <item
         android:id="@+id/menu_scan_qr_code"
-        android:icon="@mipmap/scan"
+        android:icon="@mipmap/scan_thin"
         android:title="Scan QR Code" />
     <item
         android:id="@+id/Money"
-        android:icon="@drawable/money_thin"
+        android:icon="@mipmap/money_thin"
         android:title="Money" />
     <item
         android:id="@+id/menu_help_and_feedback"
-        android:icon="@mipmap/help"
+        android:icon="@mipmap/help_thin"
         android:title="Help &amp; Feedback" />
 </menu>

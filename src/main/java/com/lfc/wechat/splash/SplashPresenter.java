@@ -4,6 +4,8 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.lfc.wechat.base.BasePresenter;
+import com.lfc.wechat.login.LoginListener;
+import com.lfc.wechat.data.login.LoginRepository;
 import com.lfc.wechat.utils.SpUtils;
 
 /**
@@ -12,16 +14,26 @@ import com.lfc.wechat.utils.SpUtils;
 
 public class SplashPresenter extends BasePresenter<SplashContract.View>
         implements SplashContract.Presenter {
-    private Context mContext;
+    private LoginRepository mLoginRepository;
 
-    SplashPresenter(Context context, SplashContract.View view) {
-        super(view);
-        mContext = context;
+    SplashPresenter(Context context, SplashContract.View view, LoginRepository loginRepository) {
+        super(context,view);
+        mLoginRepository = loginRepository;
     }
 
     @Override
-    public void autoLogin() {
-        mView.startMainActivity();
+    public void autoLogin(String username, String password) {
+        mLoginRepository.login(username, password, new LoginListener() {
+            @Override
+            public void onLoginSuccess() {
+                mView.startMainActivity();
+            }
+
+            @Override
+            public void onLoginFailed(Throwable e) {
+                mView.startLoginActivity();
+            }
+        });
     }
 
     @Override
@@ -29,7 +41,7 @@ public class SplashPresenter extends BasePresenter<SplashContract.View>
         String usn = SpUtils.readString(mContext, SpUtils.USERNAME);
         String pwd = SpUtils.readString(mContext, SpUtils.PASSWORD);
         if (!TextUtils.isEmpty(usn) && !TextUtils.isEmpty(pwd)) {
-            autoLogin();
+            autoLogin(usn, pwd);
         } else {
             mView.startLoginActivity();
         }

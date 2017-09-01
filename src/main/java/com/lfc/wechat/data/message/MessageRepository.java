@@ -1,7 +1,7 @@
-package com.lfc.wechat.model.message;
+package com.lfc.wechat.data.message;
 
 import com.lfc.wechat.entity.Chat;
-import com.lfc.wechat.global.Constant;
+import com.lfc.wechat.global.GlobalConstant;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class MessageRepository implements MessageDataSource {
     private MessageDataSource mRepository;
 
     public MessageRepository() {
-        if (Constant.USE_REMOTE_REPOSITORY) {
+        if (GlobalConstant.USE_REMOTE_REPOSITORY) {
             mRepository = new MessageRemoteDataSource();
         } else {
             mRepository = new FakeMessageDataSource();

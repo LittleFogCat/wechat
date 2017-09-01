@@ -3,6 +3,7 @@ package com.lfc.wechat;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
@@ -48,7 +49,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     LinearLayout footerLayout;
 
     List<RelativeLayout> footItems;
-
+    @BindView(R.id.view_pager)
     ViewPager viewPager;
     Fragment mChatListFragment, mContactFragment, mDiscoverFragment, mMeFragment;
 
@@ -78,25 +79,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     //初始化中部
     void initBody() {
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
-//        LayoutInflater inflater = getLayoutInflater();
-//        pageChat = inflater.inflate(R.layout.chat_fragment, viewPager, false);
-//        contact_fragment = inflater.inflate(R.layout.contact_fragment, viewPager, false);
-//        discover_fragment = inflater.inflate(R.layout.discover_fragment, viewPager, false);
-//        me_fragment = inflater.inflate(R.layout.me_fragment, viewPager, false);
-//        final List<View> pages = new ArrayList<>();
-//        pages.add(pageChat);
-//        pages.add(contact_fragment);
-//        pages.add(discover_fragment);
-//        pages.add(me_fragment);
-
         mChatListFragment = ChatListFragment.newInstance();
         mContactFragment = ContactFragment.newInstance();
         mDiscoverFragment = DiscoverFragment.newInstance();
         mMeFragment = MeFragment.newInstance();
         List<Fragment> fragments = new ArrayList<>(Arrays.asList(mChatListFragment, mContactFragment, mDiscoverFragment, mMeFragment));
 
-        FragmentPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), fragments);
+        FragmentPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), fragments) {
+            @Override
+            public int getItemPosition(Object object) {
+                return POSITION_NONE;
+            }
+        };
 
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -231,4 +225,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         return super.onPrepareOptionsMenu(menu);
     }
 
+    public void refreshViewPager() {
+        viewPager.getAdapter().notifyDataSetChanged();
+        Log.d(TAG, "refreshViewPager: " + getSupportFragmentManager().getFragments());
+    }
 }

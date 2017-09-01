@@ -5,8 +5,7 @@ import android.util.Log;
 
 import com.lfc.wechat.base.BasePresenter;
 import com.lfc.wechat.entity.Account;
-import com.lfc.wechat.model.login.LoginRepository;
-import com.lfc.wechat.utils.CommonUtils;
+import com.lfc.wechat.data.login.LoginRepository;
 import com.lfc.wechat.utils.SpUtils;
 
 /**
@@ -19,7 +18,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
     private Context mContext = null;
 
     protected LoginPresenter(Context context, LoginContract.View view, LoginRepository loginRepository) {
-        super(view);
+        super(context,view);
         mLoginRepository = loginRepository;
         mContext = context;
     }
@@ -35,18 +34,20 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
     }
 
     @Override
-    public void login(String username, String password) {
+    public void login(final String username, final String password) {
         Log.d(TAG, "login: 开始登录");
         login(username, password, new LoginListener() {
             @Override
             public void onLoginSuccess() {
                 mView.onLoginSuccess();
+                SpUtils.saveString(mContext, "username", username);
+                SpUtils.saveString(mContext, "password", password);
             }
 
             @Override
             public void onLoginFailed(Throwable e) {
                 Log.w(TAG, "onLoginFailed: " + e.getMessage());
-                mView.onLoginFailed();
+                mView.onLoginFailed(e);
             }
         });
     }

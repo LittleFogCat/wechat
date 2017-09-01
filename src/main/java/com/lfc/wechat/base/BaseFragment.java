@@ -7,7 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lfc.wechat.R;
+import com.lfc.wechat.utils.DialogUtils;
+
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by 47510 on 2017/8/23.
@@ -15,7 +19,9 @@ import butterknife.ButterKnife;
 
 public abstract class BaseFragment<P extends IBasePresenter> extends Fragment
         implements IBaseView<P> {
+    protected static final String TAG = "BaseFragment";
     protected P mPresenter;
+    private SweetAlertDialog mProgressDialog = null;
 
     protected BaseFragment() {
 
@@ -44,5 +50,33 @@ public abstract class BaseFragment<P extends IBasePresenter> extends Fragment
     public void onDestroy() {
         super.onDestroy();
         if (mPresenter != null) mPresenter.unsubscribe();
+    }
+
+    public void showProgressDialog() {
+        showProgressDialog(getString(R.string.please_wait));
+    }
+
+    public void dismissProgressDialog() {
+        if (mProgressDialog != null) {
+            mProgressDialog.cancel();
+            mProgressDialog = null;
+        }
+    }
+
+    @Override
+    public void showProgressDialog(String msg) {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
+        mProgressDialog = DialogUtils.showProgressDialog(getContext(), msg);
+        mProgressDialog.show();
+    }
+
+    public void pop() {
+        getFragmentManager().beginTransaction().remove(this).commit();
+    }
+
+    public BaseActivity getBaseActivity(){
+        return (BaseActivity) getActivity();
     }
 }

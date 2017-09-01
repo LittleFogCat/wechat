@@ -1,5 +1,7 @@
 package com.lfc.wechat.main.contacts;
 
+import android.content.Context;
+
 import com.lfc.wechat.base.BasePresenter;
 
 /**
@@ -8,8 +10,8 @@ import com.lfc.wechat.base.BasePresenter;
 
 public class ContactPresenter extends BasePresenter<ContactContract.View>
         implements ContactContract.Presenter {
-    protected ContactPresenter(ContactContract.View view) {
-        super(view);
+    protected ContactPresenter(Context context, ContactContract.View view) {
+        super(context, view);
     }
 
     @Override

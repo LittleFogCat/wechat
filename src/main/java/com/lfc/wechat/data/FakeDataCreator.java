@@ -1,6 +1,5 @@
-package com.lfc.wechat.model;
+package com.lfc.wechat.data;
 
-import android.util.Log;
 import android.view.View;
 
 import com.lfc.wechat.entity.Chat;
@@ -9,7 +8,6 @@ import com.lfc.wechat.entity.User;
 import com.lfc.wechat.utils.RandomUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 

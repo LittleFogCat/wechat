@@ -32,6 +32,6 @@ public class DiscoverFragment extends BaseFragment<DiscoverContract.Presenter>
 
     @Override
     public DiscoverContract.Presenter getPresenter() {
-        return new DiscoverPresenter(this);
+        return new DiscoverPresenter(getContext(),this);
     }
 }

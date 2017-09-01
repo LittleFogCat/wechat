@@ -6,4 +6,10 @@ package com.lfc.wechat.base;
 
 public interface IBaseView<P extends IBasePresenter> {
     P getPresenter();
+
+    void showProgressDialog(String msg);
+
+    void showProgressDialog();
+
+    void dismissProgressDialog();
 }

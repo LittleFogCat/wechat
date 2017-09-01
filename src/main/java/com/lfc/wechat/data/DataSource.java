@@ -1,4 +1,4 @@
-package com.lfc.wechat.model;
+package com.lfc.wechat.data;
 
 /**
  * Created by LittleFogCat on 2017/8/30.

@@ -12,7 +12,7 @@ public interface LoginContract {
     interface View extends IBaseView<Presenter> {
         void onLoginSuccess();
 
-        void onLoginFailed();
+        void onLoginFailed(Throwable e);
 
         void onRegisterSuccess(Account account);
 

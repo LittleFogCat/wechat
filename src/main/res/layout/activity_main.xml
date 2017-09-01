@@ -47,42 +47,12 @@
             layout="@layout/item_footer" />
     </LinearLayout>
 
-    <!--<LinearLayout-->
-        <!--android:id="@+id/footer_fill"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:background="@color/colorLight"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:weightSum="100"-->
-        <!--app:layout_heightPercent="8.4%">-->
-
-        <!--<include-->
-            <!--android:id="@+id/footer_chats_fill"-->
-            <!--layout="@layout/item_footer_fill" />-->
-
-        <!--<include-->
-            <!--android:id="@+id/footer_contacts_fill"-->
-            <!--layout="@layout/item_footer_fill" />-->
-
-        <!--<include-->
-            <!--android:id="@+id/footer_discover_fill"-->
-            <!--layout="@layout/item_footer_fill" />-->
-
-        <!--<include-->
-            <!--android:id="@+id/footer_me_fill"-->
-            <!--layout="@layout/item_footer_fill" />-->
-    <!--</LinearLayout>-->
-
     <View
         android:id="@+id/footer_line"
         android:layout_width="match_parent"
-        android:background="@color/lightGray"
         android:layout_height="0.5dp"
         android:layout_above="@id/footer"
-        />
+        android:background="@color/lightGray" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
@@ -90,5 +60,12 @@
         android:layout_above="@id/footer_line"
         android:layout_below="@id/header" />
 
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_above="@id/footer_line"
+        android:layout_below="@id/header">
+
+    </FrameLayout>
 
 </android.support.percent.PercentRelativeLayout>

@@ -21,12 +21,16 @@ public class LutilApplication extends Application {
         activities.remove(activity);
     }
 
+    public void exit() {
+        finishAll();
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
     public void finishAll() {
         for (Activity activity : activities) {
             if (!activity.isFinishing()) {
                 activity.finish();
             }
         }
-        android.os.Process.killProcess(android.os.Process.myPid());
     }
 }

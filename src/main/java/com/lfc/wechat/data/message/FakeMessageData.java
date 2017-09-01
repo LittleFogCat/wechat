@@ -1,7 +1,7 @@
-package com.lfc.wechat.model.message;
+package com.lfc.wechat.data.message;
 
 import com.lfc.wechat.entity.Chat;
-import com.lfc.wechat.model.FakeDataCreator;
+import com.lfc.wechat.data.FakeDataCreator;
 
 import java.util.ArrayList;
 import java.util.List;

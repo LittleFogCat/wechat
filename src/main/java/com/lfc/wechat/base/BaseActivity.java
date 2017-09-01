@@ -7,6 +7,7 @@ import com.lfc.wechat.application.LutilApplication;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by LittleFogCat on 2017/8/24.
@@ -15,6 +16,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AutoLayoutActivity {
     private static final String TAG = "BaseActivity";
+    private SweetAlertDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,12 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         ((LutilApplication) getApplication()).removeActivity(this);
     }
 
-    protected void exit() {
+    public void exit() {
+        ((LutilApplication) getApplication()).exit();
+    }
+
+    public void finishAll() {
         ((LutilApplication) getApplication()).finishAll();
     }
+
 }

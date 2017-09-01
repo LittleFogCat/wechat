@@ -1,57 +1,44 @@
 package com.lfc.wechat.main.chatlist;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.lfc.wechat.MessageItem;
 import com.lfc.wechat.R;
+import com.lfc.wechat.base.BaseFragment;
 import com.lfc.wechat.entity.Chat;
-import com.lfc.wechat.model.message.MessageRepository;
+import com.lfc.wechat.data.message.MessageRepository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import butterknife.BindView;
 
 /**
  * Created by jjy on 2017/4/2.
  */
 
-public class ChatListFragment extends Fragment {
+public class ChatListFragment extends BaseFragment<ChatListContract.Presenter>
+        implements ChatListContract.View {
     private static final String TAG = "ChatListFragment";
-    private RecyclerView mRecyclerView;
+    @BindView(R.id.recycler_view_message)
+    RecyclerView mRecyclerView;
 
     public static ChatListFragment newInstance() {
-
         Bundle args = new Bundle();
-
         ChatListFragment fragment = new ChatListFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.chat_fragment, container, false);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_message);
-        return view;
+    public int getContentView() {
+        return R.layout.chat_fragment;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        initView();
-    }
-
-    void initView() {
+    public void initView() {
         MessageRepository messageRepository = new MessageRepository();
         List<Chat> chatList = messageRepository.getChatList();
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
@@ -71,5 +58,10 @@ public class ChatListFragment extends Fragment {
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
+    }
+
+    @Override
+    public ChatListContract.Presenter getPresenter() {
+        return new ChatListPresenter(getContext(),this);
     }
 }

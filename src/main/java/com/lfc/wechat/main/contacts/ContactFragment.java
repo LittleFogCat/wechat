@@ -40,6 +40,6 @@ public class ContactFragment extends BaseFragment<ContactContract.Presenter>
 
     @Override
     public ContactContract.Presenter getPresenter() {
-        return new ContactPresenter(this);
+        return new ContactPresenter(getContext(),this);
     }
 }

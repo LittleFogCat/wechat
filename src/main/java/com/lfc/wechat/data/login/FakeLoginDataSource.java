@@ -1,4 +1,4 @@
-package com.lfc.wechat.model.login;
+package com.lfc.wechat.data.login;
 
 import com.lfc.wechat.entity.Account;
 import com.lfc.wechat.login.LoginListener;

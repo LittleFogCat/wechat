@@ -1,10 +1,13 @@
 package com.lfc.wechat.login;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lfc.wechat.R;
 import com.lfc.wechat.base.BaseFragment;
 import com.lfc.wechat.base.IBasePresenter;
@@ -23,6 +26,8 @@ public class UnLogFragment extends BaseFragment {
     TextView mBtnReg;
     @BindView(R.id.btnLanguage)
     TextView mLanguage;
+    @BindView(R.id.bg)
+    ImageView mBackground;
 
     public static UnLogFragment newInstance() {
 

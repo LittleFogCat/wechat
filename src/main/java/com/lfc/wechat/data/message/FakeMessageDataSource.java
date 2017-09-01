@@ -1,4 +1,4 @@
-package com.lfc.wechat.model.message;
+package com.lfc.wechat.data.message;
 
 import com.lfc.wechat.entity.Chat;
 
