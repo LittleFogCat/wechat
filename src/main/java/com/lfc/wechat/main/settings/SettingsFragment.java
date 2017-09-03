@@ -2,10 +2,11 @@ package com.lfc.wechat.main.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.lfc.wechat.R;
-import com.lfc.wechat.base.BaseFragment;
+import com.lfc.wechat.base.BaseBackToolbarFragment;
 import com.lfc.wechat.login.LoginActivity;
 
 import butterknife.BindView;
@@ -14,10 +15,12 @@ import butterknife.BindView;
  * Created by LittleFogCat on 2017/9/1.
  */
 
-public class SettingsFragment extends BaseFragment<SettingsContract.Presenter>
+public class SettingsFragment extends BaseBackToolbarFragment<SettingsContract.Presenter>
         implements SettingsContract.View {
     @BindView(R.id.exit)
     View mExit;
+
+    ExitDialog mExitDialog;
 
     public static SettingsFragment newInstance() {
         Bundle args = new Bundle();
@@ -36,12 +39,18 @@ public class SettingsFragment extends BaseFragment<SettingsContract.Presenter>
         return R.layout.settings_fragment;
     }
 
+    @NonNull
     @Override
-    public void initView() {
+    public String getTitle() {
+        return getString(R.string.setting);
+    }
+
+    @Override
+    public void initMainView() {
         mExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExitDialog exitDialog = new ExitDialog(getContext(), new ExitDialog.OnOptionClickListener() {
+                mExitDialog = new ExitDialog(getContext(), new ExitDialog.OnOptionClickListener() {
                     @Override
                     public void onLogoutClick() {
                         mPresenter.logout();
@@ -52,13 +61,16 @@ public class SettingsFragment extends BaseFragment<SettingsContract.Presenter>
                         getBaseActivity().exit();
                     }
                 });
-                exitDialog.show();
+                mExitDialog.show();
             }
         });
     }
 
     @Override
     public void onLogoutSuccess() {
+        if (mExitDialog != null && mExitDialog.isShowing()) {
+            mExitDialog.dismiss();
+        }
         getBaseActivity().finishAll();
         startActivity(new Intent(getContext(), LoginActivity.class));
     }

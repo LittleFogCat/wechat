@@ -1,6 +1,7 @@
 package com.lfc.wechat.login;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
@@ -59,13 +60,8 @@ public class LoginActivity extends BaseMVPActivity<LoginContract.Presenter>
     @Override
     public void onLoginSuccess() {
         dismissProgressDialog();
-        DialogUtils.showSuccessDialog(this, getString(R.string.login_success), new SweetAlertDialog.OnSweetClickListener() {
-            @Override
-            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
-            }
-        });
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        finish();
     }
 
     public void onRegisterClicked(String username, String password) {

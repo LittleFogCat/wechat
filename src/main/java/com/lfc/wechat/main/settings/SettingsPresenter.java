@@ -20,7 +20,7 @@ public class SettingsPresenter extends BasePresenter<SettingsContract.View>
     public void logout() {
         SpUtils.saveString(mContext, SpUtils.USERNAME, null);
         SpUtils.saveString(mContext, SpUtils.PASSWORD, null);
-
+        mView.onLogoutSuccess();
     }
 
     @Override
