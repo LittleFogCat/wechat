@@ -11,7 +11,7 @@ import android.widget.EditText;
 import com.lfc.wechat.R;
 import com.lfc.wechat.application.LutilApplication;
 import com.lfc.wechat.utils.DialogUtils;
-import com.zhy.autolayout.AutoLayoutActivity;
+import com.example.ui.autolayout.AutoLayoutActivity;
 
 import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;

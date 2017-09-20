@@ -1,1 +1,1 @@
-include ':wechat2'
+include ':wechat2',':ui'

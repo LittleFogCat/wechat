@@ -3,8 +3,8 @@ package com.lfc.wechat.base;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.ui.autolayout.AutoLayoutActivity;
 import com.lfc.wechat.application.LutilApplication;
-import com.zhy.autolayout.AutoLayoutActivity;
 
 import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -14,7 +14,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * Activity基础类
  */
 
-public abstract class BaseActivity extends AutoLayoutActivity {
+public abstract class BaseActivity extends AutoLayoutActivity{
     private static final String TAG = "BaseActivity";
     private SweetAlertDialog mProgressDialog;
 

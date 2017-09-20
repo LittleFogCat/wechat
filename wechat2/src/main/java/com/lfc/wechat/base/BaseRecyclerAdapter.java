@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zhy.autolayout.utils.AutoUtils;
+import com.example.ui.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.jauker.widget.BadgeView;
 import com.lfc.wechat.base.BaseActivity;
 import com.lfc.wechat.main.chatlist.ChatListFragment;
 import com.lfc.wechat.main.chatlist.MyPagerAdapter;
@@ -63,10 +62,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         initWidgets();
         initBody();
         initFooter();
-        BadgeView badgeView = new BadgeView(this);
-        badgeView.setTargetView(toolbar.findViewById(R.id.menu_add_contacts));
-//        badgeView.setTargetView();
-        badgeView.setBadgeCount(5);
     }
 
     //初始化头部
