@@ -66,8 +66,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     //初始化头部
     void initWidgets() {
-        toolbar = (Toolbar) findViewById(R.id.header);
-
         setSupportActionBar(toolbar);
         toolbar.hideOverflowMenu();
     }

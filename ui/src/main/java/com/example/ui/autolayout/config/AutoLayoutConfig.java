@@ -10,10 +10,9 @@ import com.example.ui.autolayout.utils.ScreenUtils;
 /**
  * Created by zhy on 15/11/18.
  */
-public class AutoLayoutConifg {
+public class AutoLayoutConfig {
 
-    private static AutoLayoutConifg sIntance = new AutoLayoutConifg();
-
+    private static AutoLayoutConfig sIntance = new AutoLayoutConfig();
 
     private static final String KEY_DESIGN_WIDTH = "design_width";
     private static final String KEY_DESIGN_HEIGHT = "design_height";
@@ -25,9 +24,9 @@ public class AutoLayoutConifg {
     private int mDesignHeight;
 
     private boolean useDeviceSize;
+    private boolean isLandscape = false;
 
-
-    private AutoLayoutConifg() {
+    private AutoLayoutConfig() {
     }
 
     public void checkParams() {
@@ -37,16 +36,23 @@ public class AutoLayoutConifg {
         }
     }
 
-    public AutoLayoutConifg useDeviceSize() {
+    public AutoLayoutConfig useDeviceSize() {
         useDeviceSize = true;
         return this;
     }
 
+    public AutoLayoutConfig setLandscape(boolean isLandscape) {
+        this.isLandscape = isLandscape;
+        return this;
+    }
 
-    public static AutoLayoutConifg getInstance() {
+    public static AutoLayoutConfig getInstance() {
         return sIntance;
     }
 
+    public void setIsLandscape(boolean b) {
+        isLandscape = b;
+    }
 
     public int getScreenWidth() {
         return mScreenWidth;
@@ -81,8 +87,15 @@ public class AutoLayoutConifg {
             applicationInfo = packageManager.getApplicationInfo(context
                     .getPackageName(), PackageManager.GET_META_DATA);
             if (applicationInfo != null && applicationInfo.metaData != null) {
-                mDesignWidth = (int) applicationInfo.metaData.get(KEY_DESIGN_WIDTH);
-                mDesignHeight = (int) applicationInfo.metaData.get(KEY_DESIGN_HEIGHT);
+                int DesignWidth = (int) applicationInfo.metaData.get(KEY_DESIGN_WIDTH);
+                int DesignHeight = (int) applicationInfo.metaData.get(KEY_DESIGN_HEIGHT);
+                if (isLandscape) {
+                    mDesignWidth = Math.max(DesignHeight, DesignWidth);
+                    mDesignHeight = Math.min(DesignHeight, DesignWidth);
+                } else {
+                    mDesignHeight = Math.max(DesignHeight, DesignWidth);
+                    mDesignWidth = Math.min(DesignHeight, DesignWidth);
+                }
             }
         } catch (PackageManager.NameNotFoundException e) {
             throw new RuntimeException(
@@ -91,6 +104,5 @@ public class AutoLayoutConifg {
 
         L.e(" designWidth =" + mDesignWidth + " , designHeight = " + mDesignHeight);
     }
-
 
 }
